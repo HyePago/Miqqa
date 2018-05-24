@@ -16,6 +16,8 @@ namespace Miqqa
 {
     public partial class Form1 : Form
     {
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +25,8 @@ namespace Miqqa
 
         private void Form1_Load(object sender, EventArgs e) // Start Server
         {
+            player.SoundLocation = "crazy_bgm.wav";
+            player.Play();
         }
 
         private void join_Click(object sender, EventArgs e)
@@ -47,7 +51,18 @@ namespace Miqqa
         {
             String nickname = Miqqa_sql.LogIn(username_login.Text, password_login.Text);
 
-            MessageBox.Show(nickname);
+            if(nickname != null)
+            {
+                MessageBox.Show(nickname + "님, 로그인!");
+
+                username_login.Clear();
+                password_login.Clear();
+            } else
+            {
+                password_login.Clear();
+                MessageBox.Show("아이디와 비밀번호를 다시 한 번 확인해주세요.");
+            }
+
         }
     }
 }
