@@ -1,0 +1,14 @@
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\bin\Debug\Miqqa.exe.config
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\bin\Debug\Miqqa.exe
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\bin\Debug\Miqqa.pdb
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\bin\Debug\MySql.Data.dll
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\bin\Debug\Google.Protobuf.dll
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\bin\Debug\MySql.Data.xml
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.csprojAssemblyReference.cache
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.Form1.resources
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.Properties.Resources.resources
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.csproj.GenerateResource.cache
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.csproj.CoreCompileInputs.cache
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.csproj.CopyComplete
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.exe
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.pdb
