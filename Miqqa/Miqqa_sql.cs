@@ -56,15 +56,26 @@ namespace Miqqa
             }
         }
 
-        public static bool LogIn(string username, string password)
+        public static string LogIn(string username, string password)
         {
             using (MySqlConnection conn = new MySqlConnection(UrlConnection))
             {
                 conn.Open();
 
-                // ID 와 비밀번호 일치하는 지 검사
+                String nickname = null;
 
-                return true;
+                // ID 와 비밀번호 일치하는 지 검사
+                string sql_select = "SELECT * FROM user WHERE username='" + username + "' and password='" + password + "';";
+                MySqlCommand cmd = new MySqlCommand(sql_select, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    nickname = rdr["nickname"].ToString();
+                }
+
+                return nickname;
             }
+        }
     }
 }

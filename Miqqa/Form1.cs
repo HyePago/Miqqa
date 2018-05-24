@@ -42,5 +42,12 @@ namespace Miqqa
                 MessageBox.Show("회원가입 완료");
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            String nickname = Miqqa_sql.LogIn(username_login.Text, password_login.Text);
+
+            MessageBox.Show(nickname);
+        }
     }
 }
