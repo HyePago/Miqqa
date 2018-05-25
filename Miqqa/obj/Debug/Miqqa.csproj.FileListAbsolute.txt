@@ -12,3 +12,15 @@ C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.csproj.CoreCompileInputs
 C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.csproj.CopyComplete
 C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.exe
 C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.pdb
+C:\Programming\ncp\Miqqa\Miqqa\bin\Debug\Miqqa.exe
+C:\Programming\ncp\Miqqa\Miqqa\bin\Debug\Miqqa.exe.config
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.Form1.resources
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.Main.resources
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.Properties.Resources.resources
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.csproj.GenerateResource.cache
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.csproj.CoreCompileInputs.cache
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.csproj.CopyComplete
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.exe
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.pdb
+C:\Programming\ncp\Miqqa\Miqqa\bin\Debug\Miqqa.pdb
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.csprojAssemblyReference.cache
