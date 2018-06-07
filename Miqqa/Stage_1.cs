@@ -27,6 +27,20 @@ namespace Miqqa
 
             mirim_image = Image.FromFile(fileName[0]);
             mirim.BackgroundImage = mirim_image;
+
+            keyTick = 0;
+            theTick = 0;
+            key_timer.Start();
+        }
+
+        int keyTick; // 이동 속도 제한
+        int theTick; // 스테이지 깨는 시간
+
+        // Key Timer
+        private void key_timer_Tick(object sender, EventArgs e)
+        {
+            keyTick++;
+            theTick++;
         }
 
         // Key Down Event
@@ -37,7 +51,12 @@ namespace Miqqa
         // Key Down Event(방향키)
         private void stage_1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            int x_blank = 17;
+            if(keyTick < 6) // 이동 초 제한
+            {
+                return;
+            }
+
+            int x_blank = 20;
             int y_blank = 20;
 
             int x = mirim.Left - x_blank;
@@ -115,6 +134,8 @@ namespace Miqqa
                     }
                     break;
             }
+
+            keyTick = 0;
         }
     }
 }

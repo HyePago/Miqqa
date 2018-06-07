@@ -115,6 +115,10 @@
     <Content Include="Images\Character\one.png" />
     <Content Include="Images\Character\three.png" />
     <Content Include="Images\Character\two.png" />
+    <None Include="Resources\stage_3_background1.png" />
+    <None Include="Resources\stage_3_background.png" />
+    <None Include="Resources\바다배경_완성1.png" />
+    <None Include="Resources\바다배경_완성.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

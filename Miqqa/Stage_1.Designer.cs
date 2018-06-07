@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mirim = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.key_timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.mirim)).BeginInit();
             this.SuspendLayout();
             // 
@@ -38,19 +40,24 @@
             this.mirim.BackColor = System.Drawing.Color.AntiqueWhite;
             this.mirim.BackgroundImage = global::Miqqa.Properties.Resources.캐릭터;
             this.mirim.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.mirim.Location = new System.Drawing.Point(17, 20);
+            this.mirim.Location = new System.Drawing.Point(20, 20);
             this.mirim.Name = "mirim";
-            this.mirim.Size = new System.Drawing.Size(95, 114);
+            this.mirim.Size = new System.Drawing.Size(80, 84);
             this.mirim.TabIndex = 0;
             this.mirim.TabStop = false;
+            // 
+            // key_timer
+            // 
+            this.key_timer.Interval = 50;
+            this.key_timer.Tick += new System.EventHandler(this.key_timer_Tick);
             // 
             // Stage_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Miqqa.Properties.Resources.game_background;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1210, 755);
+            this.BackgroundImage = global::Miqqa.Properties.Resources.stage_3_background1;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClientSize = new System.Drawing.Size(1199, 721);
             this.Controls.Add(this.mirim);
             this.DoubleBuffered = true;
             this.Name = "Stage_1";
@@ -64,5 +71,6 @@
 
         private System.Windows.Forms.PictureBox mirim;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Timer key_timer;
     }
 }
