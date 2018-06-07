@@ -10,7 +10,7 @@ namespace Miqqa
 {
     class Miqqa_sql
     {
-        private static String Servidor = "localhost";
+        private static String Servidor = "10.96.124.114";
         private static String Usuario = "root";
         private static String Senha = "1234";
         private static String db = "miqqa";

@@ -63,9 +63,39 @@ namespace Miqqa.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap exit_btn {
+            get {
+                object obj = ResourceManager.GetObject("exit_btn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Form1_password {
             get {
                 object obj = ResourceManager.GetObject("Form1_password", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap game_background {
+            get {
+                object obj = ResourceManager.GetObject("game_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 캐릭터 {
+            get {
+                object obj = ResourceManager.GetObject("캐릭터", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

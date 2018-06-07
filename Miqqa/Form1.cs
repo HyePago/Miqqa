@@ -16,7 +16,7 @@ namespace Miqqa
 {
     public partial class Form1 : Form
     {
-        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+        //System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 
         public Form1()
         {
@@ -27,8 +27,8 @@ namespace Miqqa
 
         private void Form1_Load(object sender, EventArgs e) // Start Server
         {
-            player.SoundLocation = "crazy_bgm.wav";
-            player.Play();
+            //player.SoundLocation = "crazy_bgm.wav";
+            //player.Play();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -56,9 +56,10 @@ namespace Miqqa
             if (nickname != null)
             {
                 MessageBox.Show(nickname + "님, 로그인!");
-
-                username_login.Clear();
-                password_login.Clear();
+            
+                this.Visible = false;
+                Stage_1 stage_1 = new Stage_1();
+                stage_1.ShowDialog();
             }
             else
             {

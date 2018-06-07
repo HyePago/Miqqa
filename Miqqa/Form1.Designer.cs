@@ -63,21 +63,21 @@
             // 
             // username
             // 
-            this.username.Location = new System.Drawing.Point(338, 69);
+            this.username.Location = new System.Drawing.Point(307, 69);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(276, 21);
             this.username.TabIndex = 0;
             // 
             // nickname
             // 
-            this.nickname.Location = new System.Drawing.Point(338, 152);
+            this.nickname.Location = new System.Drawing.Point(307, 152);
             this.nickname.Name = "nickname";
             this.nickname.Size = new System.Drawing.Size(276, 21);
             this.nickname.TabIndex = 2;
             // 
             // password
             // 
-            this.password.Location = new System.Drawing.Point(338, 112);
+            this.password.Location = new System.Drawing.Point(307, 112);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(276, 21);
             this.password.TabIndex = 1;
@@ -111,7 +111,7 @@
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(221, 192);
+            this.button2.Location = new System.Drawing.Point(190, 192);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(388, 29);
             this.button2.TabIndex = 20;
@@ -122,7 +122,7 @@
             // 
             this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Location = new System.Drawing.Point(154, 152);
+            this.pictureBox4.Location = new System.Drawing.Point(123, 152);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(145, 24);
             this.pictureBox4.TabIndex = 19;
@@ -132,7 +132,7 @@
             // 
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox3.Location = new System.Drawing.Point(154, 109);
+            this.pictureBox3.Location = new System.Drawing.Point(123, 109);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(145, 24);
             this.pictureBox3.TabIndex = 18;
@@ -143,7 +143,7 @@
             this.pictureBox2.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(154, 68);
+            this.pictureBox2.Location = new System.Drawing.Point(123, 68);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(145, 24);
             this.pictureBox2.TabIndex = 17;
@@ -196,7 +196,7 @@
             this.panel1.Controls.Add(this.pictureBox6);
             this.panel1.Controls.Add(this.password_login);
             this.panel1.Controls.Add(this.username_login);
-            this.panel1.Location = new System.Drawing.Point(177, 272);
+            this.panel1.Location = new System.Drawing.Point(139, 266);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(463, 115);
             this.panel1.TabIndex = 16;
@@ -224,7 +224,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(112, 42);
+            this.pictureBox1.Location = new System.Drawing.Point(81, 42);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(578, 194);
             this.pictureBox1.TabIndex = 15;
@@ -235,7 +235,7 @@
             this.pictureBox8.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.BackgroundImage")));
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox8.Location = new System.Drawing.Point(511, 12);
+            this.pictureBox8.Location = new System.Drawing.Point(460, 8);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(268, 20);
             this.pictureBox8.TabIndex = 22;
@@ -248,7 +248,7 @@
             this.Start.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Start.FlatAppearance.BorderSize = 0;
             this.Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Start.Location = new System.Drawing.Point(190, 393);
+            this.Start.Location = new System.Drawing.Point(152, 387);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(105, 38);
             this.Start.TabIndex = 13;
@@ -263,7 +263,7 @@
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(355, 393);
+            this.button4.Location = new System.Drawing.Point(317, 387);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(105, 38);
             this.button4.TabIndex = 14;
@@ -277,7 +277,7 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(515, 393);
+            this.button5.Location = new System.Drawing.Point(477, 387);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(105, 38);
             this.button5.TabIndex = 15;
@@ -289,7 +289,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(736, 440);
             this.Controls.Add(this.Start);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);

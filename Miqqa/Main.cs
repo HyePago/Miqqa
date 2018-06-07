@@ -37,5 +37,10 @@ namespace Miqqa
                 form1.ShowDialog();
             }
         }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

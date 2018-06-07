@@ -38,9 +38,9 @@
             // 
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(-42, -24);
+            this.button1.Location = new System.Drawing.Point(-2, -2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(884, 498);
+            this.button1.Size = new System.Drawing.Size(740, 444);
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -53,10 +53,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 468);
+            this.ClientSize = new System.Drawing.Size(736, 440);
             this.Controls.Add(this.button1);
             this.Name = "Main";
             this.Text = "Main";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
 
         }
