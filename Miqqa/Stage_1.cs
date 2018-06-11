@@ -15,6 +15,7 @@ namespace Miqqa
         string[] fileName = { "./Images/Character/one.png", "./Images/Character/three.png" };
         Boolean mirim_img = true;
         Image mirim_image;
+        CharacterEngine characterEngine = new CharacterEngine();
 
         // 블록의 위치
         int[,] block_location = new int[,]{
@@ -26,6 +27,11 @@ namespace Miqqa
             { 395, 320 },
             { 545, 170 }
         };
+
+        // 폭탄
+        List<PictureBox> bombs = new List<PictureBox>();
+        List<int[]> bombs_location = new List<int[]>();
+        Image bomb_image = Image.FromFile("./Images/Bomb/one.png");
 
         public Stage_1()
         {
@@ -41,18 +47,41 @@ namespace Miqqa
 
             keyTick = 0;
             theTick = 0;
+            bombTick = 0;
             key_timer.Start();
             
         }
 
         int keyTick; // 이동 속도 제한
         int theTick; // 스테이지 깨는 시간
+        int bombTick; // 폭탄 나오는 시간
+        int bomb_x, bomb_y; // 폭탄 위치
 
         // Key Timer
         private void key_timer_Tick(object sender, EventArgs e)
         {
             keyTick++;
             theTick++;
+            bombTick++;
+
+            if(bombTick > 100) // 폭탄 투척
+            {
+                bombTick = 0;
+                PictureBox bombPicture = new PictureBox();
+
+                characterEngine.randomBomb(block_location, ref bomb_x, ref bomb_y);
+
+                bombPicture.Size = new System.Drawing.Size(75, 75);
+                bombPicture.Location = new System.Drawing.Point(bomb_x, bomb_y);
+                bombPicture.BackgroundImage = bomb_image;
+                bombPicture.BackColor = Color.Transparent;
+                bombPicture.BackgroundImageLayout = ImageLayout.Stretch;
+                Controls.Add(bombPicture);
+
+                bombs.Add(bombPicture);
+
+                bombs_location.Add(new int[]{ bomb_x, bomb_y });
+            }
         }
 
         // Key Down Event
@@ -63,7 +92,7 @@ namespace Miqqa
         // Key Down Event(방향키)
         private void stage_1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if(keyTick < 6) // 이동 초 제한
+            if(keyTick < 3) // 이동 초 제한
             {
                 return;
             }
@@ -75,9 +104,7 @@ namespace Miqqa
             int y = mirim.Top - y_blank;
             int left = 0, top = 0;
 
-
-            CharacterEngine characterEngine = new CharacterEngine();
-            characterEngine.character_move(ref x, ref y, e, ref keyTick, ref left, ref top, block_location);
+            characterEngine.character_move(ref x, ref y, e, ref keyTick, ref left, ref top, block_location, bombs_location);
 
             // 이미지 변경
             if (mirim_img == true)
@@ -95,7 +122,6 @@ namespace Miqqa
 
             mirim.Left += left;
             mirim.Top += top;
-            
         }
     }
 }

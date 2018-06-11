@@ -15,6 +15,7 @@ namespace Miqqa
         string[] fileName = { "./Images/Character/one.png", "./Images/Character/three.png" };
         Boolean mirim_img = true;
         Image mirim_image;
+        List<int[]> bombs_location = new List<int[]>();
         // 블록의 위치
         int[,] block_location = new int[,]{
             { 95, 20 },
@@ -67,7 +68,7 @@ namespace Miqqa
 
 
             CharacterEngine characterEngine = new CharacterEngine();
-            characterEngine.character_move(ref x, ref y, e, ref keyTick, ref left, ref top, block_location);
+            characterEngine.character_move(ref x, ref y, e, ref keyTick, ref left, ref top, block_location, bombs_location);
 
             // 이미지 변경
             if (mirim_img == true)

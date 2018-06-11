@@ -14,7 +14,7 @@ namespace Miqqa
     {
         string[] fileName = { "./Images/Character/one.png", "./Images/Character/three.png" };
 
-        public void character_move(ref int x, ref int y, PreviewKeyDownEventArgs e, ref int keyTick, ref int left, ref int top, int[ , ] block_location)
+        public void character_move(ref int x, ref int y, PreviewKeyDownEventArgs e, ref int keyTick, ref int left, ref int top, int[ , ] block_location, List<int[]> bombs_location)
         {
             left = 0;
             top = 0;
@@ -63,7 +63,40 @@ namespace Miqqa
                 }
             }
 
+            for(int i=0; i<bombs_location.Count; i++)
+            {
+                if(character_x == bombs_location[i][0] && character_y == bombs_location[i][1])
+                {
+                    top = 0;
+                    left = 0;
+                    break;
+                }
+            }
+
             keyTick = 0;
+        }
+
+        public void randomBomb(int[,] block_location, ref int bomb_x, ref int bomb_y)
+        {
+            Random rand = new Random();
+            int x = rand.Next(1, 12);
+            int y = rand.Next(1, 9);
+
+            x = x * 75 + 20;
+            y = y * 75 + 20;
+
+            for(int i=0; i<block_location.GetLength(0); i++)
+            {
+                if(x==block_location[i, 0] && y == block_location[i, 1])
+                {
+                    x = rand.Next(1, 13);
+                    y = rand.Next(1, 10);
+                    i = -1;
+                }
+            }
+
+            bomb_x = x;
+            bomb_y = y;
         }
     }
 }
