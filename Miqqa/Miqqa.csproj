@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterEngine.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +68,18 @@
     <Compile Include="Stage_1.Designer.cs">
       <DependentUpon>Stage_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stage_2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stage_2.Designer.cs">
+      <DependentUpon>Stage_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stage_3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stage_3.Designer.cs">
+      <DependentUpon>Stage_3.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +98,12 @@
     </Compile>
     <EmbeddedResource Include="Stage_1.resx">
       <DependentUpon>Stage_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stage_2.resx">
+      <DependentUpon>Stage_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stage_3.resx">
+      <DependentUpon>Stage_3.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -115,6 +134,10 @@
     <Content Include="Images\Character\one.png" />
     <Content Include="Images\Character\three.png" />
     <Content Include="Images\Character\two.png" />
+    <None Include="Resources\연못.png" />
+    <None Include="Resources\벚꽃.png" />
+    <None Include="Resources\나무.png" />
+    <None Include="Resources\stage_1_background.jpg" />
     <None Include="Resources\stage_3_background1.png" />
     <None Include="Resources\stage_3_background.png" />
     <None Include="Resources\바다배경_완성1.png" />

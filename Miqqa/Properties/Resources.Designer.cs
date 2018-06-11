@@ -93,6 +93,16 @@ namespace Miqqa.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap stage_1_background {
+            get {
+                object obj = ResourceManager.GetObject("stage_1_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap stage_3_background {
             get {
                 object obj = ResourceManager.GetObject("stage_3_background", resourceCulture);
@@ -113,6 +123,16 @@ namespace Miqqa.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap 나무 {
+            get {
+                object obj = ResourceManager.GetObject("나무", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap 바다배경_완성 {
             get {
                 object obj = ResourceManager.GetObject("바다배경_완성", resourceCulture);
@@ -126,6 +146,26 @@ namespace Miqqa.Properties {
         internal static System.Drawing.Bitmap 바다배경_완성1 {
             get {
                 object obj = ResourceManager.GetObject("바다배경_완성1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 벚꽃 {
+            get {
+                object obj = ResourceManager.GetObject("벚꽃", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 연못 {
+            get {
+                object obj = ResourceManager.GetObject("연못", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -16,6 +16,17 @@ namespace Miqqa
         Boolean mirim_img = true;
         Image mirim_image;
 
+        // 블록의 위치
+        int[,] block_location = new int[,]{
+            { 95, 20 },
+            { 245, 245 },
+            { 320, 320 },
+            { 320, 395 },
+            { 395, 395 },
+            { 395, 320 },
+            { 545, 170 }
+        };
+
         public Stage_1()
         {
             InitializeComponent();
@@ -31,6 +42,7 @@ namespace Miqqa
             keyTick = 0;
             theTick = 0;
             key_timer.Start();
+            
         }
 
         int keyTick; // 이동 속도 제한
@@ -61,81 +73,29 @@ namespace Miqqa
 
             int x = mirim.Left - x_blank;
             int y = mirim.Top - y_blank;
-            switch (e.KeyCode)
+            int left = 0, top = 0;
+
+
+            CharacterEngine characterEngine = new CharacterEngine();
+            characterEngine.character_move(ref x, ref y, e, ref keyTick, ref left, ref top, block_location);
+
+            // 이미지 변경
+            if (mirim_img == true)
             {
-                case Keys.Left:
-                    if (x >= 75)
-                    {
-                        mirim.Left -= 75;
-                        if(mirim_img == true)
-                        {
-                            mirim_image = Image.FromFile(fileName[1]);
-                            mirim.BackgroundImage = mirim_image;
-                            mirim_img = false;
-                        } else
-                        {
-                            mirim_image = Image.FromFile(fileName[0]);
-                            mirim.BackgroundImage = mirim_image;
-                            mirim_img = true;
-                        }
-                    }
-                    break;
-                case Keys.Right:
-                    if (x < 825) {
-                        mirim.Left += 75;
-                        if (mirim_img == true)
-                        {
-                            mirim_image = Image.FromFile(fileName[1]);
-                            mirim.BackgroundImage = mirim_image;
-                            mirim_img = false;
-                        }
-                        else
-                        {
-                            mirim_image = Image.FromFile(fileName[0]);
-                            mirim.BackgroundImage = mirim_image;
-                            mirim_img = true;
-                        }
-                    }
-                    break;
-                case Keys.Up:
-                    if (y >= 75)
-                    {
-                        mirim.Top -= 75;
-                        if (mirim_img == true)
-                        {
-                            mirim_image = Image.FromFile(fileName[1]);
-                            mirim.BackgroundImage = mirim_image;
-                            mirim_img = false;
-                        }
-                        else
-                        {
-                            mirim_image = Image.FromFile(fileName[0]);
-                            mirim.BackgroundImage = mirim_image;
-                            mirim_img = true;
-                        }
-                    }
-                    break;
-                case Keys.Down:
-                    if (y < 600)
-                    {
-                        mirim.Top += 75;
-                        if (mirim_img == true)
-                        {
-                            mirim_image = Image.FromFile(fileName[1]);
-                            mirim.BackgroundImage = mirim_image;
-                            mirim_img = false;
-                        }
-                        else
-                        {
-                            mirim_image = Image.FromFile(fileName[0]);
-                            mirim.BackgroundImage = mirim_image;
-                            mirim_img = true;
-                        }
-                    }
-                    break;
+                mirim_image = Image.FromFile(fileName[1]);
+                mirim.BackgroundImage = mirim_image;
+                mirim_img = false;
+            }
+            else
+            {
+                mirim_image = Image.FromFile(fileName[0]);
+                mirim.BackgroundImage = mirim_image;
+                mirim_img = true;
             }
 
-            keyTick = 0;
+            mirim.Left += left;
+            mirim.Top += top;
+            
         }
     }
 }

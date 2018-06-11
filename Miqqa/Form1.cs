@@ -23,6 +23,9 @@ namespace Miqqa
             InitializeComponent();
             Main main = new Main();
             main.Close();
+
+            password.PasswordChar = '*';
+            password_login.PasswordChar = '*';
         }
 
         private void Form1_Load(object sender, EventArgs e) // Start Server

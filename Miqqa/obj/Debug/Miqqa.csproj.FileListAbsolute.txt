@@ -26,3 +26,5 @@ C:\Programming\ncp\Miqqa\Miqqa\bin\Debug\Miqqa.pdb
 C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.csprojAssemblyReference.cache
 C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.Main.resources
 C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.Stage_1.resources
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.Stage_3.resources
+C:\Users\Mirim\source\repos\Miqqa\Miqqa\obj\Debug\Miqqa.Stage_2.resources
