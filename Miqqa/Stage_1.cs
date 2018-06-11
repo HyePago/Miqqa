@@ -27,11 +27,14 @@ namespace Miqqa
             { 395, 320 },
             { 545, 170 }
         };
+        List<PictureBox> block = new List<PictureBox>();
 
         // 폭탄
         List<PictureBox> bombs = new List<PictureBox>();
         List<int[]> bombs_location = new List<int[]>();
+        List<int> bombs_count = new List<int>();
         Image bomb_image = Image.FromFile("./Images/Bomb/one.png");
+        Image bomb_pop_image = Image.FromFile("./Images/Bomb/bomb.png");
 
         public Stage_1()
         {
@@ -49,7 +52,14 @@ namespace Miqqa
             theTick = 0;
             bombTick = 0;
             key_timer.Start();
-            
+
+            block.Add(pictureBox1);
+            block.Add(pictureBox2);
+            block.Add(pictureBox3);
+            block.Add(pictureBox4);
+            block.Add(pictureBox5);
+            block.Add(pictureBox6);
+            block.Add(pictureBox7);
         }
 
         int keyTick; // 이동 속도 제한
@@ -63,6 +73,11 @@ namespace Miqqa
             keyTick++;
             theTick++;
             bombTick++;
+
+            for(int i=0; i<bombs_count.Count; i++)
+            {
+                bombs_count[i]++;
+            }
 
             if(bombTick > 100) // 폭탄 투척
             {
@@ -79,8 +94,44 @@ namespace Miqqa
                 Controls.Add(bombPicture);
 
                 bombs.Add(bombPicture);
-
                 bombs_location.Add(new int[]{ bomb_x, bomb_y });
+                bombs_count.Add(0);
+            }
+
+            // 폭탄 터지는 작업
+            for(int i=0; i<bombs_count.Count; i++)
+            {
+                if(bombs_count[i] == 70) // 폭탄이 놓인지 3.5초가 지났으면
+                {
+                    bombs[i].BackgroundImage = bomb_pop_image;
+                    int bombs_left = bombs[i].Left;
+                    int bombs_top = bombs[i].Top;
+
+                    if(bombs_left >= 95)
+                    {
+                        bombs_left -= 75;
+                    }
+
+                    bombs[i].Location = new System.Drawing.Point(bombs_left, bombs_top);
+
+                    if (bombs_left < 770)
+                    {
+                        bombs[i].Size = new System.Drawing.Size(225, 75);
+                    } else if (bombs_left < 95) {
+                        bombs[i].Size = new System.Drawing.Size(150, 75);
+                    } else
+                    {
+                        bombs[i].Size = new System.Drawing.Size(150, 75);
+                    }
+                }
+
+                if(bombs_count[i] == 90)
+                {
+                    bombs[i].Visible = false;
+                    bombs.RemoveAt(i);
+                    bombs_location.RemoveAt(i);
+                    bombs_count.RemoveAt(i);
+                }
             }
         }
 
