@@ -88,9 +88,10 @@ namespace Miqqa
 
                 bombPicture.Size = new System.Drawing.Size(75, 75);
                 bombPicture.Location = new System.Drawing.Point(bomb_x, bomb_y);
-                bombPicture.BackgroundImage = bomb_image;
                 bombPicture.BackColor = Color.Transparent;
                 bombPicture.BackgroundImageLayout = ImageLayout.Stretch;
+                bombPicture.Image = Image.FromFile("./Images/Bomb/waterball.gif");
+                bombPicture.BackgroundImage = bombPicture.Image;
                 Controls.Add(bombPicture);
 
                 bombs.Add(bombPicture);
