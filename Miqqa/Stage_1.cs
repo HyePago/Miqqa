@@ -37,19 +37,28 @@ namespace Miqqa
             { 395, 320 },
             { 545, 170 }
         };
+        int[,] finish_location = new int[,]
+        {
+            {395, 395 } 
+        };
 
         // 폭탄
         List<PictureBox> bombs = new List<PictureBox>();
         List<int[]> bombs_location = new List<int[]>();
         List<int> bombs_count = new List<int>();
+        List<PictureBox> waterball = new List<PictureBox>();
         Image bomb_image = Image.FromFile("./Images/Bomb/one.png");
-        Image bomb_pop_image = Image.FromFile("./Images/Bomb/bomb.png");
+        Image bomb_pop_image = Image.FromFile("./Images/Bomb/bomb.jpg");
 
         // 초콜릿 아이템
         List<PictureBox> choco = new List<PictureBox>();
         List<int[]> choco_location = new List<int[]>();
         List<int> choco_count = new List<int>();
         PictureBox chocolate = new PictureBox();
+
+        // FINISH
+        Image finishImage = Image.FromFile("./Images/Bomb/finish.png");
+        PictureBox finish = new PictureBox();
 
         public Stage_1()
         {
@@ -77,6 +86,8 @@ namespace Miqqa
             block.Add(pictureBox5);
             block.Add(pictureBox6);
             block.Add(pictureBox7);
+
+
         }
 
         int keyTick; // 이동 속도 제한
@@ -178,6 +189,17 @@ namespace Miqqa
                                     } 
                                 }
 
+                                if(block_location[j, 0] == finish_location[0, 0] && block_location[j,1] == finish_location[0, 1])
+                                {
+                                    finish.Size = new System.Drawing.Size(75, 75);
+                                    finish.Location = new System.Drawing.Point(finish_location[0, 0], finish_location[0, 1]);
+                                    finish.BackColor = Color.Transparent;
+                                    finish.BackgroundImageLayout = ImageLayout.Stretch;
+                                    finish.Image = finishImage;
+                                    finish.BackgroundImage = chocolate.Image;
+                                    Controls.Add(finish);
+                                }
+
                                 block.RemoveAt(j);
                                 block_location[j, 0] = 0;
                                 block_location[j, 1] = 0;
@@ -238,6 +260,21 @@ namespace Miqqa
             stage_2.ShowDialog();
         }
 
+        private static DateTime Delay(int MS)
+        {
+            DateTime ThisMoment = DateTime.Now;
+            TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
+            DateTime AfterWards = ThisMoment.Add(duration);
+
+            while (AfterWards >= ThisMoment)
+            {
+                System.Windows.Forms.Application.DoEvents();
+                ThisMoment = DateTime.Now;
+            }
+
+            return DateTime.Now;
+        }
+
         // Key Down Event
         void Stage_1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -246,7 +283,78 @@ namespace Miqqa
         // Key Down Event(방향키)
         private void stage_1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if(keyTick < 3) // 이동 초 제한
+            // 물풍선
+            PictureBox waterPicture = new PictureBox();
+            int num = 0;
+            if (e.KeyCode == Keys.Space)
+            {
+                waterPicture.Size = new System.Drawing.Size(75, 75);
+                waterPicture.Location = new System.Drawing.Point(mirim.Left, mirim.Top); //*물풍선 위치는 space바 누를때마다 누른 지점(즉 캐릭터 위치에 물풍선 !)
+                num = 1;
+                int x_balloon = waterPicture.Location.X;
+                int y_balloon = waterPicture.Location.Y;
+                waterPicture.BackgroundImage = bomb_image;
+                waterPicture.BackColor = Color.Transparent;
+                waterPicture.BackgroundImageLayout = ImageLayout.Stretch;
+
+                Controls.Add(waterPicture);
+                if (num == 1)
+                {
+                    Delay(1000);
+                    waterPicture.Size = new System.Drawing.Size(225, 75);
+                    waterPicture.Location = new System.Drawing.Point(x_balloon -75, y_balloon);
+                    waterPicture.BackgroundImage = bomb_pop_image;
+                    Controls.Add(waterPicture);
+                    // 블록이 사라지는 동작
+                    for (int j = 0; j < block.Count(); j++)
+                    {
+                        for (int k = waterPicture.Location.X; k < waterPicture.Location.X + waterPicture.Size.Width; k += 75)
+                        {
+                            if (block_location[j, 0] == k && block_location[j, 1] == waterPicture.Location.Y)
+                            {
+                                block[j].Visible = false;
+                                
+                                // 아이템이 나오도록
+                                for (int c = 0; c < item_location.GetLength(0); c++)
+                                {
+                                    if (block_location[j, 0] == item_location[c, 0] && block_location[j, 1] == item_location[c, 1])
+                                    {
+                                        chocolate.Size = new System.Drawing.Size(75, 75);
+                                        chocolate.Location = new System.Drawing.Point(item_location[c, 0], item_location[c, 1]);
+                                        chocolate.BackColor = Color.Transparent;
+                                        chocolate.BackgroundImageLayout = ImageLayout.Stretch;
+                                        chocolate.Image = Image.FromFile("./Images/Item/chocolate.png");
+                                        chocolate.BackgroundImage = chocolate.Image;
+                                        Controls.Add(chocolate);
+
+                                        choco.Add(chocolate);
+                                        choco_location.Add(new int[] { item_location[c, 0], item_location[c, 1] });
+                                        choco_count.Add(0);
+                                    }
+                                }
+
+                                if (block_location[j, 0] == finish_location[0, 0] && block_location[j, 1] == finish_location[0, 1])
+                                {
+                                    finish.Size = new System.Drawing.Size(75, 75);
+                                    finish.Location = new System.Drawing.Point(finish_location[0, 0], finish_location[0, 1]);
+                                    finish.BackColor = Color.Transparent;
+                                    finish.BackgroundImageLayout = ImageLayout.Stretch;
+                                    finish.Image = finishImage;
+                                    finish.BackgroundImage = finish.Image;
+                                    Controls.Add(finish);
+                                }
+                                //block.RemoveAt(j);
+                                block_location[j, 0] = 0;
+                                block_location[j, 1] = 0;
+                            }
+                        }
+                    }
+                    Delay(1000);
+                    Controls.Remove(waterPicture);
+                }
+            }
+
+            if (keyTick < 3) // 이동 초 제한
             {
                 return;
             }
@@ -298,6 +406,38 @@ namespace Miqqa
                     {
                         heart2.Visible = true;
                     }
+                }
+            }
+
+            if (finish_location[0, 0] == mirim.Left && finish_location[0, 1] == mirim.Top)
+            {
+                finish.Visible = false;
+                finish_location[0, 0] = 0;
+                finish_location[0, 1] = 0;
+
+                for(int i=0; i<block.Count(); i++)
+                {
+                    block[i].Visible = false;
+
+                    block_location[i, 0] = 0;
+                    block_location[i, 1] = 0;
+                }
+
+                // 아이템이 나오도록
+                for (int c = 0; c < 4; c++)
+                {
+                    chocolate.Size = new System.Drawing.Size(75, 75);
+                    chocolate.Location = new System.Drawing.Point(item_location[c, 0], item_location[c, 1]);
+                    chocolate.BackColor = Color.Transparent;
+                    chocolate.BackgroundImageLayout = ImageLayout.Stretch;
+                    chocolate.Image = Image.FromFile("./Images/Item/chocolate.png");
+                    chocolate.BackgroundImage = chocolate.Image;
+                    chocolate.Visible = true;
+                    Controls.Add(chocolate);
+
+                    choco.Add(chocolate);
+                    choco_location.Add(new int[] { item_location[c, 0], item_location[c, 1] });
+                    choco_count.Add(0);
                 }
             }
         }
