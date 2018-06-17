@@ -131,6 +131,7 @@
     <None Include="Resources\캐릭터.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\Images\Item\hearts.png" />
     <Content Include="Images\Character\one.png" />
     <Content Include="Images\Character\three.png" />
     <Content Include="Images\Character\two.png" />

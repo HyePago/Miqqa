@@ -33,7 +33,7 @@ namespace Miqqa
             if(theTick == 30)
             {
                 this.Visible = false;
-                Form1 form1 = new Form1();
+                Stage_1 form1 = new Stage_1();
                 form1.ShowDialog();
             }
         }

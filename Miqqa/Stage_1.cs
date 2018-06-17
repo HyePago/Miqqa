@@ -29,12 +29,27 @@ namespace Miqqa
         };
         List<PictureBox> block = new List<PictureBox>();
 
+        // 아이템의 위치
+        int[,] item_location = new int[,]
+        {
+            { 245, 245 },
+            { 320, 320 },
+            { 395, 320 },
+            { 545, 170 }
+        };
+
         // 폭탄
         List<PictureBox> bombs = new List<PictureBox>();
         List<int[]> bombs_location = new List<int[]>();
         List<int> bombs_count = new List<int>();
         Image bomb_image = Image.FromFile("./Images/Bomb/one.png");
         Image bomb_pop_image = Image.FromFile("./Images/Bomb/bomb.png");
+
+        // 초콜릿 아이템
+        List<PictureBox> choco = new List<PictureBox>();
+        List<int[]> choco_location = new List<int[]>();
+        List<int> choco_count = new List<int>();
+        PictureBox chocolate = new PictureBox();
 
         public Stage_1()
         {
@@ -50,8 +65,10 @@ namespace Miqqa
 
             keyTick = 0;
             theTick = 0;
+            theHeart = 0;
             bombTick = 0;
             key_timer.Start();
+            end = false;
 
             block.Add(pictureBox1);
             block.Add(pictureBox2);
@@ -66,6 +83,8 @@ namespace Miqqa
         int theTick; // 스테이지 깨는 시간
         int bombTick; // 폭탄 나오는 시간
         int bomb_x, bomb_y; // 폭탄 위치
+        int theHeart; // 생명력 깎이는 거 제한
+        bool end;
 
         // Key Timer
         private void key_timer_Tick(object sender, EventArgs e)
@@ -73,6 +92,7 @@ namespace Miqqa
             keyTick++;
             theTick++;
             bombTick++;
+            theHeart++;
 
             for(int i=0; i<bombs_count.Count; i++)
             {
@@ -96,7 +116,7 @@ namespace Miqqa
 
                 bombs.Add(bombPicture);
                 bombs_location.Add(new int[]{ bomb_x, bomb_y });
-                bombs_count.Add(0);
+                bombs_count.Add(0);             
             }
 
             // 폭탄 터지는 작업
@@ -104,6 +124,7 @@ namespace Miqqa
             {
                 if(bombs_count[i] == 70) // 폭탄이 놓인지 3.5초가 지났으면
                 {
+                    bombs_location.RemoveAt(i);
                     bombs[i].BackgroundImage = bomb_pop_image;
                     int bombs_left = bombs[i].Left;
                     int bombs_top = bombs[i].Top;
@@ -124,16 +145,97 @@ namespace Miqqa
                     {
                         bombs[i].Size = new System.Drawing.Size(150, 75);
                     }
+
+
+                    bombs[i].BackColor = Color.Transparent;
+                    bombs[i].BackgroundImageLayout = ImageLayout.Stretch;
+
+                    // 블록이 사라지는 동작
+                    for(int j=0; j<block.Count(); j++)
+                    {
+                        for(int k=bombs[i].Location.X; k < bombs[i].Location.X + bombs[i].Size.Width; k+= 75)
+                        {
+                            if(block_location[j,0] == k && block_location[j,1] == bombs[i].Location.Y)
+                            {
+                                block[j].Visible = false;
+
+                                // 아이템이 나오도록
+                                for(int c=0; c < item_location.GetLength(0); c++)
+                                {
+                                    if(block_location[j,0] == item_location[c, 0] && block_location[j,1] == item_location[c, 1])
+                                    {
+                                        chocolate.Size = new System.Drawing.Size(75, 75);
+                                        chocolate.Location = new System.Drawing.Point(item_location[c, 0], item_location[c, 1]);
+                                        chocolate.BackColor = Color.Transparent;
+                                        chocolate.BackgroundImageLayout = ImageLayout.Stretch;
+                                        chocolate.Image = Image.FromFile("./Images/Item/chocolate.png");
+                                        chocolate.BackgroundImage = chocolate.Image;
+                                        Controls.Add(chocolate);
+
+                                        choco.Add(chocolate);
+                                        choco_location.Add(new int[] { item_location[c, 0], item_location[c, 1] });
+                                        choco_count.Add(0);
+                                    } 
+                                }
+
+                                block.RemoveAt(j);
+                                block_location[j, 0] = 0;
+                                block_location[j, 1] = 0;
+                            }
+                        }
+                    }
                 }
 
-                if(bombs_count[i] == 90)
+                if(bombs_count[i] >= 70 && bombs_count[i] <= 90) // 캐릭터가 부딪치는 작업- 생명 하나 줄어드는 작업
+                {
+                    for (int k = bombs[i].Location.X; k < bombs[i].Location.X + bombs[i].Size.Width; k += 75)
+                    {
+                        if(mirim.Location.X == k && mirim.Location.Y == bombs[i].Location.Y)
+                        {
+                            if (theHeart > 20)
+                            {
+                                if (heart2.Visible == true)
+                                {
+                                    heart2.Visible = false;
+                                }
+                                else if (heart1.Visible == true)
+                                {
+                                    heart1.Visible = false;
+                                }
+                                else
+                                {
+                                    end = true;
+                                    break;
+                                }
+                                theHeart = 0;
+                            }
+                        }
+                    }
+                }
+
+                if (end == true) break;
+
+                if (bombs_count[i] == 90)
                 {
                     bombs[i].Visible = false;
                     bombs.RemoveAt(i);
-                    bombs_location.RemoveAt(i);
                     bombs_count.RemoveAt(i);
                 }
             }
+
+            if(end == true)
+            {
+                Failed_End();
+            }
+        }
+
+        void Failed_End()
+        {
+            key_timer.Stop();
+
+            this.Visible = false;
+            Stage_2 stage_2 = new Stage_2();
+            stage_2.ShowDialog();
         }
 
         // Key Down Event
@@ -174,6 +276,30 @@ namespace Miqqa
 
             mirim.Left += left;
             mirim.Top += top;
+
+            for (int i = 0; i < choco_count.Count; i++)
+            {
+                int choco_left = choco[i].Left;
+                int choco_top = choco[i].Top;
+
+                if (mirim.Left == choco_left && mirim.Top == choco_top) // 초콜릿을 먹었을 떄
+                {
+                    choco[i].Visible = false;
+                    choco.RemoveAt(i);
+                    choco_location.RemoveAt(i);
+                    choco_count.RemoveAt(i);
+                    //heart1.Visible = true;
+
+                    if (heart1.Visible == false)
+                    {
+                        heart1.Visible = true;
+                    }
+                    else if (heart2.Visible == false)
+                    {
+                        heart2.Visible = true;
+                    }
+                }
+            }
         }
     }
 }

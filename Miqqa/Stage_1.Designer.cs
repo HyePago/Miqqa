@@ -39,6 +39,8 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.heart2 = new System.Windows.Forms.PictureBox();
+            this.heart1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.mirim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -47,6 +49,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heart2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heart1)).BeginInit();
             this.SuspendLayout();
             // 
             // mirim
@@ -128,6 +132,28 @@
             this.pictureBox7.TabIndex = 7;
             this.pictureBox7.TabStop = false;
             // 
+            // heart2
+            // 
+            this.heart2.BackColor = System.Drawing.Color.Transparent;
+            this.heart2.BackgroundImage = global::Miqqa.Properties.Resources.hearts;
+            this.heart2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.heart2.Location = new System.Drawing.Point(1037, 546);
+            this.heart2.Name = "heart2";
+            this.heart2.Size = new System.Drawing.Size(67, 66);
+            this.heart2.TabIndex = 11;
+            this.heart2.TabStop = false;
+            // 
+            // heart1
+            // 
+            this.heart1.BackColor = System.Drawing.Color.Transparent;
+            this.heart1.BackgroundImage = global::Miqqa.Properties.Resources.hearts;
+            this.heart1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.heart1.Location = new System.Drawing.Point(964, 546);
+            this.heart1.Name = "heart1";
+            this.heart1.Size = new System.Drawing.Size(67, 66);
+            this.heart1.TabIndex = 10;
+            this.heart1.TabStop = false;
+            // 
             // Stage_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -135,6 +161,8 @@
             this.BackgroundImage = global::Miqqa.Properties.Resources.stage_1_background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1199, 721);
+            this.Controls.Add(this.heart2);
+            this.Controls.Add(this.heart1);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
@@ -154,6 +182,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heart2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -170,5 +200,7 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox heart2;
+        private System.Windows.Forms.PictureBox heart1;
     }
 }
