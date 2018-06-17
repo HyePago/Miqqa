@@ -33,3 +33,5 @@ C:\Programming\ncp\Miqqa\Miqqa\bin\Debug\MySql.Data.xml
 C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.Stage_1.resources
 C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.Stage_2.resources
 C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.Stage_3.resources
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.fail.resources
+C:\Programming\ncp\Miqqa\Miqqa\obj\Debug\Miqqa.way.resources

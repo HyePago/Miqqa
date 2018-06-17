@@ -70,5 +70,12 @@ namespace Miqqa
                 MessageBox.Show("아이디와 비밀번호를 다시 한 번 확인해주세요.");
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            way way = new way();
+            way.ShowDialog();
+        }
     }
 }

@@ -25,7 +25,25 @@ namespace Miqqa
             { 320, 395 },
             { 395, 395 },
             { 395, 320 },
-            { 545, 170 }
+            { 545, 170 },
+            { 620, 545 },
+            { 695, 545 },
+            { 470, 470 },
+            { 395, 470 },
+            {470, 395 },
+            {695, 470 },
+            {770, 545 },
+            {620, 620},
+            { 845, 545 },
+            {845, 620 },
+            { 770, 620 },
+            { 695, 620 },
+            {845, 470 },
+            {620, 75 },
+            {620, 170 },
+            { 695, 170 },
+            { 695, 95 },
+            {245, 170 }
         };
         List<PictureBox> block = new List<PictureBox>();
 
@@ -76,6 +94,8 @@ namespace Miqqa
             theTick = 0;
             theHeart = 0;
             bombTick = 0;
+            item_cnt = 0;
+            thefinish = 0;
             key_timer.Start();
             end = false;
 
@@ -86,16 +106,34 @@ namespace Miqqa
             block.Add(pictureBox5);
             block.Add(pictureBox6);
             block.Add(pictureBox7);
-
-
+            block.Add(pictureBox8);
+            block.Add(pictureBox9);
+            block.Add(pictureBox10);
+            block.Add(pictureBox11);
+            block.Add(pictureBox12);
+            block.Add(pictureBox13);
+            block.Add(pictureBox14);
+            block.Add(pictureBox15);
+            block.Add(pictureBox16);
+            block.Add(pictureBox17);
+            block.Add(pictureBox18);
+            block.Add(pictureBox19);
+            block.Add(pictureBox20);
+            block.Add(pictureBox21);
+            block.Add(pictureBox22);
+            block.Add(pictureBox23);
+            block.Add(pictureBox24);
+            block.Add(pictureBox25);
         }
 
+        int thefinish;
         int keyTick; // 이동 속도 제한
         int theTick; // 스테이지 깨는 시간
         int bombTick; // 폭탄 나오는 시간
         int bomb_x, bomb_y; // 폭탄 위치
         int theHeart; // 생명력 깎이는 거 제한
         bool end;
+        int item_cnt;
 
         // Key Timer
         private void key_timer_Tick(object sender, EventArgs e)
@@ -104,6 +142,8 @@ namespace Miqqa
             theTick++;
             bombTick++;
             theHeart++;
+
+            current_time.Text = (theTick / 50) + "초";
 
             for(int i=0; i<bombs_count.Count; i++)
             {
@@ -136,6 +176,7 @@ namespace Miqqa
                 if(bombs_count[i] == 70) // 폭탄이 놓인지 3.5초가 지났으면
                 {
                     bombs_location.RemoveAt(i);
+                    bombs[i].Image = bomb_pop_image;
                     bombs[i].BackgroundImage = bomb_pop_image;
                     int bombs_left = bombs[i].Left;
                     int bombs_top = bombs[i].Top;
@@ -256,8 +297,10 @@ namespace Miqqa
             key_timer.Stop();
 
             this.Visible = false;
-            Stage_2 stage_2 = new Stage_2();
-            stage_2.ShowDialog();
+            fail fail = new fail();
+            fail.time = theTick;
+            fail.item = item_cnt;
+            fail.ShowDialog();
         }
 
         private static DateTime Delay(int MS)
@@ -280,6 +323,20 @@ namespace Miqqa
         {
             //MessageBox.Show(e.KeyChar.ToString());
         }
+
+        private void finish_timer_Tick(object sender, EventArgs e)
+        {
+            thefinish++;
+       
+            if(thefinish > 30)
+            {
+                finish_timer.Stop();
+                this.Visible = false;
+                Stage_2 stage2 = new Stage_2();
+                stage2.ShowDialog();
+            }
+        }
+
         // Key Down Event(방향키)
         private void stage_1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -392,6 +449,8 @@ namespace Miqqa
 
                 if (mirim.Left == choco_left && mirim.Top == choco_top) // 초콜릿을 먹었을 떄
                 {
+                    item_cnt += 1;
+                    item_count.Text = item_cnt + "개";
                     choco[i].Visible = false;
                     choco.RemoveAt(i);
                     choco_location.RemoveAt(i);
@@ -409,8 +468,10 @@ namespace Miqqa
                 }
             }
 
-            if (finish_location[0, 0] == mirim.Left && finish_location[0, 1] == mirim.Top)
+            if (finish_location[0, 0] == mirim.Left && finish_location[0, 1] == mirim.Top) // finish 아이템을 먹었을 떄
             {
+                finish_timer.Start();
+
                 finish.Visible = false;
                 finish_location[0, 0] = 0;
                 finish_location[0, 1] = 0;

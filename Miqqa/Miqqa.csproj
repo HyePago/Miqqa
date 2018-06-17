@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharacterEngine.cs" />
+    <Compile Include="fail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fail.Designer.cs">
+      <DependentUpon>fail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,15 @@
     <Compile Include="Stage_3.Designer.cs">
       <DependentUpon>Stage_3.cs</DependentUpon>
     </Compile>
+    <Compile Include="way.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="way.Designer.cs">
+      <DependentUpon>way.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="fail.resx">
+      <DependentUpon>fail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Stage_3.resx">
       <DependentUpon>Stage_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="way.resx">
+      <DependentUpon>way.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -131,6 +149,9 @@
     <None Include="Resources\캐릭터.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\cancel-music.png" />
+    <None Include="Resources\way.png" />
+    <None Include="Resources\fail.png" />
     <None Include="bin\Debug\Images\Item\hearts.png" />
     <Content Include="Images\Character\one.png" />
     <Content Include="Images\Character\three.png" />
