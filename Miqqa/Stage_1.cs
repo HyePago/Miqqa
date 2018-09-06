@@ -22,16 +22,11 @@ namespace Miqqa
         int[,] blockLocation = new int[25,2];
         List<PictureBox> block = new List<PictureBox>();
 
-        // 폭탄 (게임에서 던지는 폭탄)
-        List<PictureBox> bombs = new List<PictureBox>();
-        List<int[]> bombsLocation = new List<int[]>();
-        List<int> bombsCount = new List<int>();
-
         // 폭탄 이미지
         Image bombImage = Image.FromFile("./Images/Bomb/one.png");
         Image bombPopImage = Image.FromFile("./Images/Bomb/bomb.jpg");
 
-        // 물풍선 (사용자가 던지는 물풍선)
+        // 물풍선 (사용자가 던지는 물풍선) + 폭탄
         List<PictureBox> waterball = new List<PictureBox>();
         List<int[]> waterballLocation = new List<int[]>();
         List<int> waterballCount = new List<int>();
@@ -51,6 +46,7 @@ namespace Miqqa
 
             keyTick = 0;
             theTick = 0;
+            bombTick = 0;
             key_timer.Start();
 
             block.Add(pictureBox1);
@@ -132,12 +128,14 @@ namespace Miqqa
 
         int keyTick; // 이동 속도 제한
         int theTick; // 스테이지 깨는 시간
+        int bombTick; // 폭탄 나오는 시간
 
         // Key Timer
         private void key_timer_Tick(object sender, EventArgs e)
         {
             keyTick++;
             theTick++;
+            bombTick++;
 
 
             current_time.Text = (theTick / 50) + "초";
@@ -199,6 +197,29 @@ namespace Miqqa
                     waterballCount.RemoveAt(i);
                 }
             }
+
+            if(bombTick > 100)
+            {
+                // 폭탄 투척
+                bombTick = 0;
+                PictureBox bombPicture = new PictureBox();
+
+                int bombX = 0, bombY = 0;
+
+                characterEngine.randomBomb(blockLocation, ref bombX, ref bombY);
+
+                bombPicture.Size = new System.Drawing.Size(75, 75);
+                bombPicture.Location = new System.Drawing.Point(bombX, bombY);
+                bombPicture.BackColor = Color.Transparent;
+                bombPicture.BackgroundImageLayout = ImageLayout.Stretch;
+                bombPicture.BackgroundImage = bombImage;
+
+                Controls.Add(bombPicture);
+
+                waterball.Add(bombPicture);
+                waterballLocation.Add(new int[] { bombX, bombY });
+                waterballCount.Add(0);
+            }
         }
 
         // Key Down Event
@@ -219,7 +240,8 @@ namespace Miqqa
                 waterPicture.Size = new System.Drawing.Size(75, 75);
                 waterPicture.Location = new System.Drawing.Point(mirim.Left, mirim.Top); // 누른 시점의 캐릭터의 위치
 
-                waterPicture.BackgroundImage = bombImage;
+                waterPicture.Image = Image.FromFile("./Images/Bomb/waterball.gif");
+                waterPicture.BackgroundImage = waterPicture.Image;
                 waterPicture.BackColor = Color.Transparent;
                 waterPicture.BackgroundImageLayout = ImageLayout.Stretch;
 
