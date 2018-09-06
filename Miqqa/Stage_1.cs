@@ -47,6 +47,7 @@ namespace Miqqa
             keyTick = 0;
             theTick = 0;
             bombTick = 0;
+            theHeart = 0;
             key_timer.Start();
 
             block.Add(pictureBox1);
@@ -129,6 +130,7 @@ namespace Miqqa
         int keyTick; // 이동 속도 제한
         int theTick; // 스테이지 깨는 시간
         int bombTick; // 폭탄 나오는 시간
+        int theHeart; // 생명력이 깎이는 것에 대한 제한 시간
 
         // Key Timer
         private void key_timer_Tick(object sender, EventArgs e)
@@ -136,6 +138,7 @@ namespace Miqqa
             keyTick++;
             theTick++;
             bombTick++;
+            theHeart++;
 
 
             current_time.Text = (theTick / 50) + "초";
@@ -183,6 +186,34 @@ namespace Miqqa
                                 blockLocation[j, 0] = 0;
                                 blockLocation[j, 1] = 0;
                                 // 아이템이 나오도록
+                            }
+                        }
+                    }
+                }
+
+                // 캐릭터가 부딪치는 과정 : 생명이 하나 줄어든다.
+                if(waterballCount[i] >= 70 && waterballCount[i] < 90)
+                {
+                    for (int k = waterball[i].Location.X; k < waterball[i].Location.X + waterball[i].Size.Width; k += 75)
+                    {
+                        if (mirim.Location.X == k && mirim.Location.Y == waterball[i].Location.Y)
+                        {
+                            if (theHeart > 20)
+                            {
+                                if (heart2.Visible == true)
+                                {
+                                    heart2.Visible = false;
+                                }
+                                else if (heart1.Visible == true)
+                                {
+                                    heart1.Visible = false;
+                                }
+                                else
+                                {
+                                    // end = true;
+                                    break;
+                                }
+                                theHeart = 0;
                             }
                         }
                     }
