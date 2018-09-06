@@ -215,10 +215,6 @@
             this.item_count.TabIndex = 13;
             this.item_count.Text = "0개";
             // 
-            // finish_timer
-            // 
-            this.finish_timer.Tick += new System.EventHandler(this.finish_timer_Tick);
-            // 
             // pictureBox8
             // 
             this.pictureBox8.BackgroundImage = global::Miqqa.Properties.Resources.나무;

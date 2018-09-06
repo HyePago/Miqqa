@@ -12,71 +12,30 @@ namespace Miqqa
 {
     public partial class Stage_1 : Form
     {
+        // Character
         string[] fileName = { "./Images/Character/one.png", "./Images/Character/three.png" };
         Boolean mirim_img = true;
         Image mirim_image;
         CharacterEngine characterEngine = new CharacterEngine();
 
         // 블록의 위치
-        int[,] block_location = new int[,]{
-            { 95, 20 },
-            { 245, 245 },
-            { 320, 320 },
-            { 320, 395 },
-            { 395, 395 },
-            { 395, 320 },
-            { 545, 170 },
-            { 620, 545 },
-            { 695, 545 },
-            { 470, 470 },
-            { 395, 470 },
-            {470, 395 },
-            {695, 470 },
-            {770, 545 },
-            {620, 620},
-            { 845, 545 },
-            {845, 620 },
-            { 770, 620 },
-            { 695, 620 },
-            {845, 470 },
-            {620, 75 },
-            {620, 170 },
-            { 695, 170 },
-            { 695, 95 },
-            {245, 170 }
-        };
+        int[,] blockLocation = new int[25,2];
         List<PictureBox> block = new List<PictureBox>();
 
-        // 아이템의 위치
-        int[,] item_location = new int[,]
-        {
-            { 245, 245 },
-            { 320, 320 },
-            { 395, 320 },
-            { 545, 170 }
-        };
-        int[,] finish_location = new int[,]
-        {
-            {395, 395 } 
-        };
-
-        // 폭탄
+        // 폭탄 (게임에서 던지는 폭탄)
         List<PictureBox> bombs = new List<PictureBox>();
-        List<int[]> bombs_location = new List<int[]>();
-        List<int> bombs_count = new List<int>();
+        List<int[]> bombsLocation = new List<int[]>();
+        List<int> bombsCount = new List<int>();
+
+        // 폭탄 이미지
+        Image bombImage = Image.FromFile("./Images/Bomb/one.png");
+        Image bombPopImage = Image.FromFile("./Images/Bomb/bomb.jpg");
+
+        // 물풍선 (사용자가 던지는 물풍선)
         List<PictureBox> waterball = new List<PictureBox>();
-        Image bomb_image = Image.FromFile("./Images/Bomb/one.png");
-        Image bomb_pop_image = Image.FromFile("./Images/Bomb/bomb.jpg");
+        List<int[]> waterballLocation = new List<int[]>();
+        List<int> waterballCount = new List<int>();
 
-        // 초콜릿 아이템
-        List<PictureBox> choco = new List<PictureBox>();
-        List<int[]> choco_location = new List<int[]>();
-        List<int> choco_count = new List<int>();
-        PictureBox chocolate = new PictureBox();
-
-        // FINISH
-        Image finishImage = Image.FromFile("./Images/Bomb/finish.png");
-        PictureBox finish = new PictureBox();
 
         public Stage_1()
         {
@@ -92,230 +51,154 @@ namespace Miqqa
 
             keyTick = 0;
             theTick = 0;
-            theHeart = 0;
-            bombTick = 0;
-            item_cnt = 0;
-            thefinish = 0;
             key_timer.Start();
-            end = false;
 
             block.Add(pictureBox1);
+            blockLocation[0, 0] = pictureBox1.Location.X;
+            blockLocation[0, 1] = pictureBox1.Location.Y;
             block.Add(pictureBox2);
+            blockLocation[1, 0] = pictureBox2.Location.X;
+            blockLocation[1, 1] = pictureBox2.Location.Y;
             block.Add(pictureBox3);
+            blockLocation[2, 0] = pictureBox3.Location.X;
+            blockLocation[2, 1] = pictureBox3.Location.Y;
             block.Add(pictureBox4);
+            blockLocation[3, 0] = pictureBox4.Location.X;
+            blockLocation[3, 1] = pictureBox4.Location.Y;
             block.Add(pictureBox5);
+            blockLocation[4, 0] = pictureBox5.Location.X;
+            blockLocation[4, 1] = pictureBox5.Location.Y;
             block.Add(pictureBox6);
+            blockLocation[5, 0] = pictureBox6.Location.X;
+            blockLocation[5, 1] = pictureBox6.Location.Y;
             block.Add(pictureBox7);
+            blockLocation[6, 0] = pictureBox7.Location.X;
+            blockLocation[6, 1] = pictureBox7.Location.Y;
             block.Add(pictureBox8);
+            blockLocation[7, 0] = pictureBox8.Location.X;
+            blockLocation[7, 1] = pictureBox8.Location.Y;
             block.Add(pictureBox9);
+            blockLocation[8, 0] = pictureBox9.Location.X;
+            blockLocation[8, 1] = pictureBox9.Location.Y;
             block.Add(pictureBox10);
+            blockLocation[9, 0] = pictureBox10.Location.X;
+            blockLocation[9, 1] = pictureBox10.Location.Y;
             block.Add(pictureBox11);
+            blockLocation[10, 0] = pictureBox11.Location.X;
+            blockLocation[10, 1] = pictureBox11.Location.Y;
             block.Add(pictureBox12);
+            blockLocation[11, 0] = pictureBox12.Location.X;
+            blockLocation[11, 1] = pictureBox12.Location.Y;
             block.Add(pictureBox13);
+            blockLocation[12, 0] = pictureBox13.Location.X;
+            blockLocation[12, 1] = pictureBox13.Location.Y;
             block.Add(pictureBox14);
+            blockLocation[13, 0] = pictureBox14.Location.X;
+            blockLocation[13, 1] = pictureBox14.Location.Y;
             block.Add(pictureBox15);
+            blockLocation[14, 0] = pictureBox15.Location.X;
+            blockLocation[14, 1] = pictureBox15.Location.Y;
             block.Add(pictureBox16);
+            blockLocation[15, 0] = pictureBox16.Location.X;
+            blockLocation[15, 1] = pictureBox16.Location.Y;
             block.Add(pictureBox17);
+            blockLocation[16, 0] = pictureBox17.Location.X;
+            blockLocation[16, 1] = pictureBox17.Location.Y;
             block.Add(pictureBox18);
+            blockLocation[17, 0] = pictureBox18.Location.X;
+            blockLocation[17, 1] = pictureBox18.Location.Y;
             block.Add(pictureBox19);
+            blockLocation[18, 0] = pictureBox19.Location.X;
+            blockLocation[18, 1] = pictureBox19.Location.Y;
             block.Add(pictureBox20);
+            blockLocation[19, 0] = pictureBox20.Location.X;
+            blockLocation[19, 1] = pictureBox20.Location.Y;
             block.Add(pictureBox21);
+            blockLocation[20, 0] = pictureBox21.Location.X;
+            blockLocation[20, 1] = pictureBox21.Location.Y;
             block.Add(pictureBox22);
+            blockLocation[21, 0] = pictureBox22.Location.X;
+            blockLocation[21, 1] = pictureBox22.Location.Y;
             block.Add(pictureBox23);
+            blockLocation[22, 0] = pictureBox23.Location.X;
+            blockLocation[22, 1] = pictureBox23.Location.Y;
             block.Add(pictureBox24);
+            blockLocation[23, 0] = pictureBox24.Location.X;
+            blockLocation[23, 1] = pictureBox24.Location.Y;
             block.Add(pictureBox25);
+            blockLocation[24, 0] = pictureBox25.Location.X;
+            blockLocation[24, 1] = pictureBox25.Location.Y;
         }
 
-        int thefinish;
         int keyTick; // 이동 속도 제한
         int theTick; // 스테이지 깨는 시간
-        int bombTick; // 폭탄 나오는 시간
-        int bomb_x, bomb_y; // 폭탄 위치
-        int theHeart; // 생명력 깎이는 거 제한
-        bool end;
-        int item_cnt;
 
         // Key Timer
         private void key_timer_Tick(object sender, EventArgs e)
         {
             keyTick++;
             theTick++;
-            bombTick++;
-            theHeart++;
+
 
             current_time.Text = (theTick / 50) + "초";
 
-            for(int i=0; i<bombs_count.Count; i++)
+            // 폭탄 및 물풍선이 터지는 작업
+            for(int i=0; i<waterballCount.Count; i++)
             {
-                bombs_count[i]++;
-            }
+                waterballCount[i]++; // 시간 추가
 
-            if(bombTick > 100) // 폭탄 투척
-            {
-                bombTick = 0;
-                PictureBox bombPicture = new PictureBox();
-
-                characterEngine.randomBomb(block_location, ref bomb_x, ref bomb_y);
-
-                bombPicture.Size = new System.Drawing.Size(75, 75);
-                bombPicture.Location = new System.Drawing.Point(bomb_x, bomb_y);
-                bombPicture.BackColor = Color.Transparent;
-                bombPicture.BackgroundImageLayout = ImageLayout.Stretch;
-                bombPicture.Image = Image.FromFile("./Images/Bomb/waterball.gif");
-                bombPicture.BackgroundImage = bombPicture.Image;
-                Controls.Add(bombPicture);
-
-                bombs.Add(bombPicture);
-                bombs_location.Add(new int[]{ bomb_x, bomb_y });
-                bombs_count.Add(0);             
-            }
-
-            // 폭탄 터지는 작업
-            for(int i=0; i<bombs_count.Count; i++)
-            {
-                if(bombs_count[i] == 70) // 폭탄이 놓인지 3.5초가 지났으면
+                if(waterballCount[i] == 70)
                 {
-                    bombs_location.RemoveAt(i);
-                    bombs[i].Image = bomb_pop_image;
-                    bombs[i].BackgroundImage = bomb_pop_image;
-                    int bombs_left = bombs[i].Left;
-                    int bombs_top = bombs[i].Top;
+                    // 폭탄이 놓인 지 3.5초가 지났다면
+                    waterball[i].Image = bombPopImage;
+                    waterball[i].BackgroundImage = bombPopImage;
 
-                    if(bombs_left >= 95)
+                    int waterballLeft = waterball[i].Left;
+                    int waterballTop = waterball[i].Top;
+
+                    if(waterballLeft >= 95)
                     {
-                        bombs_left -= 75;
+                        waterballLeft -= 75;
                     }
 
-                    bombs[i].Location = new System.Drawing.Point(bombs_left, bombs_top);
+                    waterball[i].Location = new System.Drawing.Point(waterballLeft, waterballTop);
 
-                    if (bombs_left < 770)
+                    if(waterballLeft < 770)
                     {
-                        bombs[i].Size = new System.Drawing.Size(225, 75);
-                    } else if (bombs_left < 95) {
-                        bombs[i].Size = new System.Drawing.Size(150, 75);
+                        waterball[i].Size = new System.Drawing.Size(225, 75);
                     } else
                     {
-                        bombs[i].Size = new System.Drawing.Size(150, 75);
+                        waterball[i].Size = new System.Drawing.Size(150, 75);
                     }
 
-
-                    bombs[i].BackColor = Color.Transparent;
-                    bombs[i].BackgroundImageLayout = ImageLayout.Stretch;
+                    waterball[i].BackColor = Color.Transparent;
+                    waterball[i].BackgroundImageLayout = ImageLayout.Stretch;
 
                     // 블록이 사라지는 동작
-                    for(int j=0; j<block.Count(); j++)
+                    for(int j=0; j<block.Count; j++)
                     {
-                        for(int k=bombs[i].Location.X; k < bombs[i].Location.X + bombs[i].Size.Width; k+= 75)
+                        for (int k = waterball[i].Location.X; k < waterball[i].Location.X + waterball[i].Size.Width; k += 75)
                         {
-                            if(block_location[j,0] == k && block_location[j,1] == bombs[i].Location.Y)
+                            if (blockLocation[j, 0] == k && blockLocation[j, 1] == waterball[i].Location.Y)
                             {
-                                block[j].Visible = false;
-
+                                block[j].Visible = false;   
+                                blockLocation[j, 0] = 0;
+                                blockLocation[j, 1] = 0;
                                 // 아이템이 나오도록
-                                for(int c=0; c < item_location.GetLength(0); c++)
-                                {
-                                    if(block_location[j,0] == item_location[c, 0] && block_location[j,1] == item_location[c, 1])
-                                    {
-                                        chocolate.Size = new System.Drawing.Size(75, 75);
-                                        chocolate.Location = new System.Drawing.Point(item_location[c, 0], item_location[c, 1]);
-                                        chocolate.BackColor = Color.Transparent;
-                                        chocolate.BackgroundImageLayout = ImageLayout.Stretch;
-                                        chocolate.Image = Image.FromFile("./Images/Item/chocolate.png");
-                                        chocolate.BackgroundImage = chocolate.Image;
-                                        Controls.Add(chocolate);
-
-                                        choco.Add(chocolate);
-                                        choco_location.Add(new int[] { item_location[c, 0], item_location[c, 1] });
-                                        choco_count.Add(0);
-                                    } 
-                                }
-
-                                if(block_location[j, 0] == finish_location[0, 0] && block_location[j,1] == finish_location[0, 1])
-                                {
-                                    finish.Size = new System.Drawing.Size(75, 75);
-                                    finish.Location = new System.Drawing.Point(finish_location[0, 0], finish_location[0, 1]);
-                                    finish.BackColor = Color.Transparent;
-                                    finish.BackgroundImageLayout = ImageLayout.Stretch;
-                                    finish.Image = finishImage;
-                                    finish.BackgroundImage = chocolate.Image;
-                                    Controls.Add(finish);
-                                }
-
-                                block.RemoveAt(j);
-                                block_location[j, 0] = 0;
-                                block_location[j, 1] = 0;
                             }
                         }
                     }
                 }
 
-                if(bombs_count[i] >= 70 && bombs_count[i] <= 90) // 캐릭터가 부딪치는 작업- 생명 하나 줄어드는 작업
+                // 폭탄이 사라지는 과정
+                if(waterballCount[i] == 90)
                 {
-                    for (int k = bombs[i].Location.X; k < bombs[i].Location.X + bombs[i].Size.Width; k += 75)
-                    {
-                        if(mirim.Location.X == k && mirim.Location.Y == bombs[i].Location.Y)
-                        {
-                            if (theHeart > 20)
-                            {
-                                if (heart2.Visible == true)
-                                {
-                                    heart2.Visible = false;
-                                }
-                                else if (heart1.Visible == true)
-                                {
-                                    heart1.Visible = false;
-                                }
-                                else
-                                {
-                                    end = true;
-                                    break;
-                                }
-                                theHeart = 0;
-                            }
-                        }
-                    }
-                }
-
-                if (end == true) break;
-
-                if (bombs_count[i] == 90)
-                {
-                    bombs[i].Visible = false;
-                    bombs.RemoveAt(i);
-                    bombs_count.RemoveAt(i);
+                    waterball[i].Visible = false;
+                    waterball.RemoveAt(i);
+                    waterballLocation.RemoveAt(i);
+                    waterballCount.RemoveAt(i);
                 }
             }
-
-            if(end == true)
-            {
-                Failed_End();
-            }
-        }
-
-        void Failed_End()
-        {
-            key_timer.Stop();
-
-            this.Visible = false;
-            fail fail = new fail();
-            fail.time = theTick;
-            fail.item = item_cnt;
-            fail.ShowDialog();
-        }
-
-        private static DateTime Delay(int MS)
-        {
-            DateTime ThisMoment = DateTime.Now;
-            TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
-            DateTime AfterWards = ThisMoment.Add(duration);
-
-            while (AfterWards >= ThisMoment)
-            {
-                System.Windows.Forms.Application.DoEvents();
-                ThisMoment = DateTime.Now;
-            }
-
-            return DateTime.Now;
         }
 
         // Key Down Event
@@ -324,91 +207,28 @@ namespace Miqqa
             //MessageBox.Show(e.KeyChar.ToString());
         }
 
-        private void finish_timer_Tick(object sender, EventArgs e)
-        {
-            thefinish++;
-       
-            if(thefinish > 30)
-            {
-                finish_timer.Stop();
-                this.Visible = false;
-                Stage_2 stage2 = new Stage_2();
-                stage2.ShowDialog();
-            }
-        }
 
         // Key Down Event(방향키)
         private void stage_1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             // 물풍선
-            PictureBox waterPicture = new PictureBox();
-            int num = 0;
-            if (e.KeyCode == Keys.Space)
+            if(e.KeyCode == Keys.Space)
             {
+                // Space를 누를 경우
+                PictureBox waterPicture = new PictureBox();
                 waterPicture.Size = new System.Drawing.Size(75, 75);
-                waterPicture.Location = new System.Drawing.Point(mirim.Left, mirim.Top); //*물풍선 위치는 space바 누를때마다 누른 지점(즉 캐릭터 위치에 물풍선 !)
-                num = 1;
-                int x_balloon = waterPicture.Location.X;
-                int y_balloon = waterPicture.Location.Y;
-                waterPicture.BackgroundImage = bomb_image;
+                waterPicture.Location = new System.Drawing.Point(mirim.Left, mirim.Top); // 누른 시점의 캐릭터의 위치
+
+                waterPicture.BackgroundImage = bombImage;
                 waterPicture.BackColor = Color.Transparent;
                 waterPicture.BackgroundImageLayout = ImageLayout.Stretch;
 
                 Controls.Add(waterPicture);
-                if (num == 1)
-                {
-                    Delay(1000);
-                    waterPicture.Size = new System.Drawing.Size(225, 75);
-                    waterPicture.Location = new System.Drawing.Point(x_balloon -75, y_balloon);
-                    waterPicture.BackgroundImage = bomb_pop_image;
-                    Controls.Add(waterPicture);
-                    // 블록이 사라지는 동작
-                    for (int j = 0; j < block.Count(); j++)
-                    {
-                        for (int k = waterPicture.Location.X; k < waterPicture.Location.X + waterPicture.Size.Width; k += 75)
-                        {
-                            if (block_location[j, 0] == k && block_location[j, 1] == waterPicture.Location.Y)
-                            {
-                                block[j].Visible = false;
-                                
-                                // 아이템이 나오도록
-                                for (int c = 0; c < item_location.GetLength(0); c++)
-                                {
-                                    if (block_location[j, 0] == item_location[c, 0] && block_location[j, 1] == item_location[c, 1])
-                                    {
-                                        chocolate.Size = new System.Drawing.Size(75, 75);
-                                        chocolate.Location = new System.Drawing.Point(item_location[c, 0], item_location[c, 1]);
-                                        chocolate.BackColor = Color.Transparent;
-                                        chocolate.BackgroundImageLayout = ImageLayout.Stretch;
-                                        chocolate.Image = Image.FromFile("./Images/Item/chocolate.png");
-                                        chocolate.BackgroundImage = chocolate.Image;
-                                        Controls.Add(chocolate);
 
-                                        choco.Add(chocolate);
-                                        choco_location.Add(new int[] { item_location[c, 0], item_location[c, 1] });
-                                        choco_count.Add(0);
-                                    }
-                                }
-
-                                if (block_location[j, 0] == finish_location[0, 0] && block_location[j, 1] == finish_location[0, 1])
-                                {
-                                    finish.Size = new System.Drawing.Size(75, 75);
-                                    finish.Location = new System.Drawing.Point(finish_location[0, 0], finish_location[0, 1]);
-                                    finish.BackColor = Color.Transparent;
-                                    finish.BackgroundImageLayout = ImageLayout.Stretch;
-                                    finish.Image = finishImage;
-                                    finish.BackgroundImage = finish.Image;
-                                    Controls.Add(finish);
-                                }
-                                //block.RemoveAt(j);
-                                block_location[j, 0] = 0;
-                                block_location[j, 1] = 0;
-                            }
-                        }
-                    }
-                    Delay(1000);
-                    Controls.Remove(waterPicture);
-                }
+                // 리스트에 추가
+                waterball.Add(waterPicture);
+                waterballLocation.Add(new int[] { waterPicture.Location.X, waterPicture.Location.Y });
+                waterballCount.Add(0);
             }
 
             if (keyTick < 3) // 이동 초 제한
@@ -423,7 +243,7 @@ namespace Miqqa
             int y = mirim.Top - y_blank;
             int left = 0, top = 0;
 
-            characterEngine.character_move(ref x, ref y, e, ref keyTick, ref left, ref top, block_location, bombs_location);
+            characterEngine.character_move(ref x, ref y, e, ref keyTick, ref left, ref top, blockLocation); //bomb
 
             // 이미지 변경
             if (mirim_img == true)
@@ -441,66 +261,6 @@ namespace Miqqa
 
             mirim.Left += left;
             mirim.Top += top;
-
-            for (int i = 0; i < choco_count.Count; i++)
-            {
-                int choco_left = choco[i].Left;
-                int choco_top = choco[i].Top;
-
-                if (mirim.Left == choco_left && mirim.Top == choco_top) // 초콜릿을 먹었을 떄
-                {
-                    item_cnt += 1;
-                    item_count.Text = item_cnt + "개";
-                    choco[i].Visible = false;
-                    choco.RemoveAt(i);
-                    choco_location.RemoveAt(i);
-                    choco_count.RemoveAt(i);
-                    //heart1.Visible = true;
-
-                    if (heart1.Visible == false)
-                    {
-                        heart1.Visible = true;
-                    }
-                    else if (heart2.Visible == false)
-                    {
-                        heart2.Visible = true;
-                    }
-                }
-            }
-
-            if (finish_location[0, 0] == mirim.Left && finish_location[0, 1] == mirim.Top) // finish 아이템을 먹었을 떄
-            {
-                finish_timer.Start();
-
-                finish.Visible = false;
-                finish_location[0, 0] = 0;
-                finish_location[0, 1] = 0;
-
-                for(int i=0; i<block.Count(); i++)
-                {
-                    block[i].Visible = false;
-
-                    block_location[i, 0] = 0;
-                    block_location[i, 1] = 0;
-                }
-
-                // 아이템이 나오도록
-                for (int c = 0; c < 4; c++)
-                {
-                    chocolate.Size = new System.Drawing.Size(75, 75);
-                    chocolate.Location = new System.Drawing.Point(item_location[c, 0], item_location[c, 1]);
-                    chocolate.BackColor = Color.Transparent;
-                    chocolate.BackgroundImageLayout = ImageLayout.Stretch;
-                    chocolate.Image = Image.FromFile("./Images/Item/chocolate.png");
-                    chocolate.BackgroundImage = chocolate.Image;
-                    chocolate.Visible = true;
-                    Controls.Add(chocolate);
-
-                    choco.Add(chocolate);
-                    choco_location.Add(new int[] { item_location[c, 0], item_location[c, 1] });
-                    choco_count.Add(0);
-                }
-            }
         }
     }
 }
