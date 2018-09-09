@@ -22,9 +22,15 @@ namespace Miqqa
         // 블록의 위치
         int[,] blockLocation = new int[25,2];
         List<PictureBox> block = new List<PictureBox>();
-
-        // 초콜릿의 위치
+    
+        // 초콜릿
         int[,] itemLocation = new int[4, 2];
+        // List<PictureBox> item = new List<PictureBox>();
+        PictureBox[] item = new PictureBox[4];
+        bool[] itemBoolean = new bool[4];
+        bool[] itemEat = new bool[4];
+        // List<Boolean> itemBoolean = new List<bool>();
+        // List<Boolean> itemEat = new List<bool>();
 
         // 폭탄 이미지
         Image bombImage = Image.FromFile("./Images/Bomb/one.png");
@@ -34,7 +40,6 @@ namespace Miqqa
         List<PictureBox> waterball = new List<PictureBox>();
         List<int[]> waterballLocation = new List<int[]>();
         List<int> waterballCount = new List<int>();
-
 
         public Stage_1()
         {
@@ -70,6 +75,8 @@ namespace Miqqa
             block.Add(pictureBox5);
             blockLocation[4, 0] = pictureBox5.Location.X;
             blockLocation[4, 1] = pictureBox5.Location.Y;
+            itemLocation[0, 0] = pictureBox5.Location.X; 
+            itemLocation[0, 1] = pictureBox5.Location.Y;
             block.Add(pictureBox6);
             blockLocation[5, 0] = pictureBox6.Location.X;
             blockLocation[5, 1] = pictureBox6.Location.Y;
@@ -85,6 +92,8 @@ namespace Miqqa
             block.Add(pictureBox10);
             blockLocation[9, 0] = pictureBox10.Location.X;
             blockLocation[9, 1] = pictureBox10.Location.Y;
+            itemLocation[1, 0] = pictureBox10.Location.X;
+            itemLocation[1, 1] = pictureBox10.Location.Y;
             block.Add(pictureBox11);
             blockLocation[10, 0] = pictureBox11.Location.X;
             blockLocation[10, 1] = pictureBox11.Location.Y;
@@ -97,6 +106,8 @@ namespace Miqqa
             block.Add(pictureBox14);
             blockLocation[13, 0] = pictureBox14.Location.X;
             blockLocation[13, 1] = pictureBox14.Location.Y;
+            itemLocation[2, 0] = pictureBox14.Location.X;
+            itemLocation[2, 1] = pictureBox14.Location.Y;
             block.Add(pictureBox15);
             blockLocation[14, 0] = pictureBox15.Location.X;
             blockLocation[14, 1] = pictureBox15.Location.Y;
@@ -121,6 +132,8 @@ namespace Miqqa
             block.Add(pictureBox22);
             blockLocation[21, 0] = pictureBox22.Location.X;
             blockLocation[21, 1] = pictureBox22.Location.Y;
+            itemLocation[3, 0] = pictureBox22.Location.X;
+            itemLocation[3, 1] = pictureBox22.Location.Y;
             block.Add(pictureBox23);
             blockLocation[22, 0] = pictureBox23.Location.X;
             blockLocation[22, 1] = pictureBox23.Location.Y;
@@ -130,6 +143,19 @@ namespace Miqqa
             block.Add(pictureBox25);
             blockLocation[24, 0] = pictureBox25.Location.X;
             blockLocation[24, 1] = pictureBox25.Location.Y;
+
+            for(int ch=0; ch < itemLocation.GetLength(0); ch++)
+            {
+                PictureBox choco = new PictureBox();
+                choco.Size = new System.Drawing.Size(75, 75);
+                choco.Location = new System.Drawing.Point(itemLocation[ch, 0], itemLocation[ch, 1]);
+                choco.BackColor = Color.Transparent;
+                choco.BackgroundImageLayout = ImageLayout.Stretch;
+                choco.Image = Image.FromFile("./Images/Item/chocolate.png");
+                choco.BackgroundImage = choco.Image;
+
+                item[ch] = choco;
+            }
         }
 
         int keyTick; // 이동 속도 제한
@@ -193,9 +219,23 @@ namespace Miqqa
                             if (blockLocation[j, 0] == k && blockLocation[j, 1] == waterball[i].Location.Y)
                             {
                                 block[j].Visible = false;   
+                                
+                                // 아이템이 나오도록
+                                for(int ch = 0; ch < itemLocation.GetLength(0); ch++)
+                                {
+                                    if(itemBoolean[ch] == false)
+                                    {
+                                        if(blockLocation[j, 0] == itemLocation[ch, 0] && blockLocation[j, 1] == itemLocation[ch, 1])
+                                        {
+                                            Controls.Add(item[ch]);
+
+                                            itemBoolean[ch] = true;
+                                        }
+                                    }
+                                }
+
                                 blockLocation[j, 0] = 0;
                                 blockLocation[j, 1] = 0;
-                                // 아이템이 나오도록
                             }
                         }
                     }
@@ -347,6 +387,19 @@ namespace Miqqa
 
             mirim.Left += left;
             mirim.Top += top;
+
+            // 아이템 먹기
+            for(int ch=0; ch < itemLocation.GetLength(0); ch++)
+            {
+                if(itemBoolean[ch] == true && itemEat[ch] == false)
+                {
+                    if(itemLocation[ch, 0] == mirim.Left && itemLocation[ch, 1] == mirim.Top)
+                    {
+                        itemEat[ch] = true;
+                        item[ch].Visible = false;
+                    } 
+                }
+            }
         }
     }
 }
