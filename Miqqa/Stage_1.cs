@@ -14,6 +14,7 @@ namespace Miqqa
     {
         // Character
         string[] fileName = { "./Images/Character/one.png", "./Images/Character/three.png" };
+        string characterimage = "./Images/Character/waterball.png";
         Boolean mirim_img = true;
         Image mirim_image;
         CharacterEngine characterEngine = new CharacterEngine();
@@ -21,6 +22,9 @@ namespace Miqqa
         // 블록의 위치
         int[,] blockLocation = new int[25,2];
         List<PictureBox> block = new List<PictureBox>();
+
+        // 초콜릿의 위치
+        int[,] itemLocation = new int[4, 2];
 
         // 폭탄 이미지
         Image bombImage = Image.FromFile("./Images/Bomb/one.png");
@@ -48,6 +52,7 @@ namespace Miqqa
             theTick = 0;
             bombTick = 0;
             theHeart = 0;
+            theConfined = -1;
             key_timer.Start();
 
             block.Add(pictureBox1);
@@ -131,6 +136,7 @@ namespace Miqqa
         int theTick; // 스테이지 깨는 시간
         int bombTick; // 폭탄 나오는 시간
         int theHeart; // 생명력이 깎이는 것에 대한 제한 시간
+        int theConfined; // 캐릭터가 물풍선에 갇히는 시간
 
         // Key Timer
         private void key_timer_Tick(object sender, EventArgs e)
@@ -140,6 +146,10 @@ namespace Miqqa
             bombTick++;
             theHeart++;
 
+            if (theConfined != -1)
+            {
+                theConfined++;
+            }
 
             current_time.Text = (theTick / 50) + "초";
 
@@ -200,20 +210,10 @@ namespace Miqqa
                         {
                             if (theHeart > 20)
                             {
-                                if (heart2.Visible == true)
-                                {
-                                    heart2.Visible = false;
-                                }
-                                else if (heart1.Visible == true)
-                                {
-                                    heart1.Visible = false;
-                                }
-                                else
-                                {
-                                    // end = true;
-                                    break;
-                                }
-                                theHeart = 0;
+                                theConfined = 0;
+                                // 캐릭터 이미지 물풍선에 갇힌 걸로 변경
+                                mirim_image = Image.FromFile(characterimage);
+                                mirim.BackgroundImage = mirim_image;
                             }
                         }
                     }
@@ -229,7 +229,25 @@ namespace Miqqa
                 }
             }
 
-            if(bombTick > 100)
+            // 생명이 줄어드는 작업
+            if(theConfined == 40)
+            {
+                if (heart2.Visible == true)
+                {
+                    heart2.Visible = false;
+                }
+                else if (heart1.Visible == true)
+                {
+                    heart1.Visible = false;
+                } else
+                {
+                    // 게임 종료
+                }
+                theConfined = -1;
+                theHeart = 0;
+            }
+
+            if (bombTick > 100)
             {
                 // 폭탄 투척
                 bombTick = 0;
@@ -263,30 +281,42 @@ namespace Miqqa
         // Key Down Event(방향키)
         private void stage_1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            // 물풍선
-            if(e.KeyCode == Keys.Space)
+            if (theConfined == -1)
             {
-                // Space를 누를 경우
-                PictureBox waterPicture = new PictureBox();
-                waterPicture.Size = new System.Drawing.Size(75, 75);
-                waterPicture.Location = new System.Drawing.Point(mirim.Left, mirim.Top); // 누른 시점의 캐릭터의 위치
+                // 물풍선
+                if (e.KeyCode == Keys.Space)
+                {
+                    // Space를 누를 경우
+                    PictureBox waterPicture = new PictureBox();
+                    waterPicture.Size = new System.Drawing.Size(75, 75);
+                    waterPicture.Location = new System.Drawing.Point(mirim.Left, mirim.Top); // 누른 시점의 캐릭터의 위치
 
-                waterPicture.Image = Image.FromFile("./Images/Bomb/waterball.gif");
-                waterPicture.BackgroundImage = waterPicture.Image;
-                waterPicture.BackColor = Color.Transparent;
-                waterPicture.BackgroundImageLayout = ImageLayout.Stretch;
+                    waterPicture.Image = Image.FromFile("./Images/Bomb/waterball.gif");
+                    waterPicture.BackgroundImage = waterPicture.Image;
+                    waterPicture.BackColor = Color.Transparent;
+                    waterPicture.BackgroundImageLayout = ImageLayout.Stretch;
 
-                Controls.Add(waterPicture);
+                    Controls.Add(waterPicture);
 
-                // 리스트에 추가
-                waterball.Add(waterPicture);
-                waterballLocation.Add(new int[] { waterPicture.Location.X, waterPicture.Location.Y });
-                waterballCount.Add(0);
+                    // 리스트에 추가
+                    waterball.Add(waterPicture);
+                    waterballLocation.Add(new int[] { waterPicture.Location.X, waterPicture.Location.Y });
+                    waterballCount.Add(0);
+                }
             }
 
-            if (keyTick < 3) // 이동 초 제한
+            if(theConfined == -1)
             {
-                return;
+                if (keyTick < 3) // 이동 초 제한
+                {
+                    return;
+                }
+            } else
+            {
+                if (keyTick < 10) // 이동 초 제한
+                {
+                    return;
+                }
             }
 
             int x_blank = 20;
@@ -298,18 +328,21 @@ namespace Miqqa
 
             characterEngine.character_move(ref x, ref y, e, ref keyTick, ref left, ref top, blockLocation); //bomb
 
-            // 이미지 변경
-            if (mirim_img == true)
+            if (theConfined == -1)
             {
-                mirim_image = Image.FromFile(fileName[1]);
-                mirim.BackgroundImage = mirim_image;
-                mirim_img = false;
-            }
-            else
-            {
-                mirim_image = Image.FromFile(fileName[0]);
-                mirim.BackgroundImage = mirim_image;
-                mirim_img = true;
+                // 이미지 변경
+                if (mirim_img == true)
+                {
+                    mirim_image = Image.FromFile(fileName[1]);
+                    mirim.BackgroundImage = mirim_image;
+                    mirim_img = false;
+                }
+                else
+                {
+                    mirim_image = Image.FromFile(fileName[0]);
+                    mirim.BackgroundImage = mirim_image;
+                    mirim_img = true;
+                }
             }
 
             mirim.Left += left;

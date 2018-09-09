@@ -111,7 +111,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::Miqqa.Properties.Resources.나무;
-            this.pictureBox1.Location = new System.Drawing.Point(95, 20);
+            this.pictureBox1.Location = new System.Drawing.Point(245, 20);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(75, 75);
             this.pictureBox1.TabIndex = 1;
