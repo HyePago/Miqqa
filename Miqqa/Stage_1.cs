@@ -31,6 +31,13 @@ namespace Miqqa
         bool[] itemEat = new bool[4];
         // List<Boolean> itemBoolean = new List<bool>();
         // List<Boolean> itemEat = new List<bool>();
+        int itemCount = 0; // 아이템 먹은 개수 (FINISH 포함)
+
+        // Finish Item
+        int[] finishLocation = new int[2];
+        PictureBox finish = new PictureBox();
+        bool finishBoolean = false;
+        bool finishEat = false;
 
         // 폭탄 이미지
         Image bombImage = Image.FromFile("./Images/Bomb/one.png");
@@ -117,6 +124,8 @@ namespace Miqqa
             block.Add(pictureBox17);
             blockLocation[16, 0] = pictureBox17.Location.X;
             blockLocation[16, 1] = pictureBox17.Location.Y;
+            finishLocation[0] = pictureBox17.Location.X;
+            finishLocation[1] = pictureBox17.Location.Y;
             block.Add(pictureBox18);
             blockLocation[17, 0] = pictureBox18.Location.X;
             blockLocation[17, 1] = pictureBox18.Location.Y;
@@ -156,6 +165,14 @@ namespace Miqqa
 
                 item[ch] = choco;
             }
+
+            finish = new PictureBox();
+            finish.Size = new System.Drawing.Size(75, 75);
+            finish.Location = new System.Drawing.Point(finishLocation[0], finishLocation[1]);
+            finish.BackColor = Color.Transparent;
+            finish.BackgroundImageLayout = ImageLayout.Stretch;
+            finish.Image = Image.FromFile("./Images/Bomb/finish.png");
+            finish.BackgroundImage = finish.Image;
         }
 
         int keyTick; // 이동 속도 제한
@@ -231,6 +248,16 @@ namespace Miqqa
 
                                             itemBoolean[ch] = true;
                                         }
+                                    }
+                                }
+
+                                if(finishBoolean == false)
+                                {
+                                    if(finishLocation[0] == blockLocation[j, 0] && finishLocation[1] == blockLocation[j, 1])
+                                    {
+                                        Controls.Add(finish);
+
+                                        finishBoolean = true;
                                     }
                                 }
 
@@ -397,7 +424,59 @@ namespace Miqqa
                     {
                         itemEat[ch] = true;
                         item[ch].Visible = false;
+
+                        itemCount++;
+                        item_count.Text = itemCount + "개";
+
+                        if (heart1.Visible == false)
+                        {
+                            heart1.Visible = true;
+                        }
+                        else if (heart2.Visible == false)
+                        {
+                            heart2.Visible = true;
+                        }
                     } 
+                }
+            }
+
+            if(finishBoolean == true && finishBoolean == false)
+            {
+                if(finishLocation[0] == mirim.Left && finishLocation[1] == mirim.Top)
+                {
+                    finishEat = true;
+                    finish.Visible = false;
+
+                    itemCount++;
+                    item_count.Text = itemCount + "개";
+
+                    // 블록이 다 사라지는 작업
+                    // 블록이 사라지는 동작
+                    for (int j = 0; j < block.Count; j++)
+                    {
+                        if(blockLocation[j, 0] != 0 && blockLocation[j, 1] != 0)
+                        {
+                            block[j].Visible = false;
+
+                            // 아이템이 나오도록
+                            for (int ch = 0; ch < itemLocation.GetLength(0); ch++)
+                            {
+                                if (itemBoolean[ch] == false)
+                                {
+                                    if (blockLocation[j, 0] == itemLocation[ch, 0] && blockLocation[j, 1] == itemLocation[ch, 1])
+                                    {
+                                        Controls.Add(item[ch]);
+
+                                        itemBoolean[ch] = true;
+                                    }
+                                }
+                            }
+
+
+                            blockLocation[j, 0] = 0;
+                            blockLocation[j, 1] = 0;
+                        }
+                    }
                 }
             }
         }
